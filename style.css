@@ -1,0 +1,41 @@
+*{
+    font-family: 'Inter', 'Poppins';
+}
+
+.btnGrayBig {
+    background-color: rgba(37, 37, 37, 0.2);
+    padding: 10px 20px;
+    color: #252525;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.btnGraySmall {
+    background-color: rgba(37, 37, 37, 0.2);
+    padding: 8px 20px;
+    color: #252525;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.btnRedBig {
+    background-color: #FF1F3D;
+    padding: 10px 20px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.btnRedSmall {
+    background-color: #FF1F3D;
+    padding: 8px 20px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+
