@@ -41,16 +41,17 @@ let loadVideos = async (category) => {
     let videosContainer = document.querySelector('.videosContainer');
     videosContainer.innerHTML = '';
     if (videos.length === 0) {
-    //     let div = document.createElement('div');
-    //     div.innerHTML = `<div class="noContent space-y-5 flex flex-col justify-center items-center mx-auto container">
-    //     <img src="./images/Icon.png" alt="No video found">
-    //     <h4 class="text-[32px] font-bold text-center">Oops!! Sorry, There is no content here</h4>
-    // </div>`
-    //     videosContainer.appendChild(div);
     noVideo.classList.remove('hidden');
     }
+
+    showVideos(videos);
+    sortVideos(videos);
+}
+
+let showVideos = videos => {
+    let videosContainer = document.querySelector('.videosContainer');
+    videosContainer.innerHTML = '';
     videos.forEach(video => {
-        console.log(video.authors[0].verified);
         let div = document.createElement('div');
         div.classList.add('video', 'max-w-sm');
         div.innerHTML = ` <img class="rounded-lg w-full h-[220px]" src="${video.thumbnail}" alt="thumbnail" />
@@ -63,11 +64,22 @@ let loadVideos = async (category) => {
                     <p class="text">${video.authors[0].profile_name}</p> <img src="./images/verified.png" alt="verified
                         class="block w-4 ${video.authors[0].verified?'hidden':'block'}>
                 </div>
-                <p class="text mt-2">99K views</p>
+                <p class="text mt-2">${video.others.views? video.others.views: 'No'} views</p>
             </div>`
         videosContainer.appendChild(div);
+        console.log(parseFloat(video.others.views));
     })
-
 }
+
+let sortVideos = videos => {
+    let sortButton = document.querySelector(".sort");
+    sortButton.addEventListener("click", () =>{
+        let sortedVideos = videos.sort((a , b) => parseFloat(b.others.views) - parseFloat(a.others.views));
+        console.log(sortedVideos);
+        showVideos(sortedVideos);
+    })
+    
+}
+
 
 loadCategories();
