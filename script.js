@@ -52,9 +52,12 @@ let showVideos = videos => {
     let videosContainer = document.querySelector('.videosContainer');
     videosContainer.innerHTML = '';
     videos.forEach(video => {
+        let postedDate = calculatePostedDate(video);
+        console.log(postedDate);
         let div = document.createElement('div');
-        div.classList.add('video', 'max-w-sm');
-        div.innerHTML = ` <img class="rounded-lg w-full h-[220px]" src="${video.thumbnail}" alt="thumbnail" />
+        div.classList.add('video', 'max-w-sm', 'relative');
+        div.innerHTML = ` <img class="rounded-lg w-full h-[220px] relative" src="${video.thumbnail}" alt="thumbnail" />
+        <p class="text text-[10px] text-white right-3 -mt-[48px] bg-gray-900 p-2 z-10 absolute rounded-[4px] ${(postedDate === undefined) ? 'hidden' : 'block'}">${postedDate} ago</p>
         <div class="py-5 cardContent flex gap-3">
             <img src="${video.authors[0].profile_picture}" alt="avatar"
                 class="avatar rounded-full h-[50px] w-[50px] cover">
@@ -67,8 +70,37 @@ let showVideos = videos => {
                 <p class="text mt-2">${video.others.views? video.others.views: 'No'} views</p>
             </div>`
         videosContainer.appendChild(div);
-        console.log(parseFloat(video.others.views));
+        // console.log(parseFloat(video.others.views));
     })
+}
+
+let calculatePostedDate = (video) => {
+    // console.log(video);
+    let seconds = video.others.posted_date;
+    // console.log(seconds);
+    if( seconds !== '' && seconds > 0) {
+        let days = `${Math.floor(seconds / (60 * 60 * 24))} days`;
+    seconds %= 3600 * 24;
+    let hours = `${Math.floor(seconds / 3600)} hrs`;
+    seconds %= 3600;
+    const minutes = `${Math.floor(seconds / 60)} min`;
+
+    let date = `${days} ${hours} ${minutes}`;
+    if(parseFloat(days) === 0){
+        return `${hours} ${minutes}`;
+    } else if (parseFloat(hours) === 0){
+        return `${days} ${minutes}`;
+    } else if (parseFloat(minutes) === 0){
+        return `${days} ${hours}`;
+    } else if (parseFloat(days) === 0 && parseFloat(hours) === 0){
+        return minutes;
+    } else if (parseFloat(hours) === 0 && parseFloat(minutes) === 0){
+        console.log(date);
+        return null;
+    } else if (parseFloat(days) === 0 && parseFloat(minutes) === 0){
+        return hours;
+    } 
+    }
 }
 
 let sortVideos = videos => {
