@@ -56,18 +56,18 @@ let showVideos = videos => {
         console.log(postedDate);
         let div = document.createElement('div');
         div.classList.add('video', 'max-w-sm', 'relative');
-        div.innerHTML = ` <img class="rounded-lg w-full h-[220px] relative" src="${video.thumbnail}" alt="thumbnail" />
-        <p class="text text-[10px] text-white right-3 -mt-[48px] bg-gray-900 p-2 z-10 absolute rounded-[4px] ${(postedDate === undefined) ? 'hidden' : 'block'}">${postedDate} ago</p>
-        <div class="py-5 cardContent flex gap-3">
+        div.innerHTML = ` <img class="rounded-lg w-full h-[220px] md:h-[160px] lg:h-[220px] relative" src="${video.thumbnail}" alt="thumbnail" />
+        <p class="text text-[10px] text-white right-3 -mt-[40px] bg-gray-900 p-2 z-10 absolute rounded-[4px] ${(postedDate === undefined) ? 'hidden' : 'block'}">${postedDate} ago</p>
+        <div class="py-5 cardContent flex items-top gap-3">
             <img src="${video.authors[0].profile_picture}" alt="avatar"
-                class="avatar rounded-full h-[50px] w-[50px] cover">
-            <div class="avatarContent">
-                <h4 class="mb-2 secon primaryHeading">${video.title}</h4>
+                class="avatar rounded-full h-[60px] w-[60px] object-cover">
+            <div class="avatarContent space-y-1">
+                <h4 class="secon primaryHeading">${video.title}</h4>
                 <div class="author flex items-center justify-start gap-2">
                     <p class="text">${video.authors[0].profile_name}</p> <img src="./images/verified.png" alt="verified
-                        class="block w-4 ${video.authors[0].verified?'hidden':'block'}>
+                        class="block ${video.authors[0].verified?'hidden':'block'} width="16px">
                 </div>
-                <p class="text mt-2">${video.others.views? video.others.views: 'No'} views</p>
+                <p class="text">${video.others.views? video.others.views: 'No'} views</p>
             </div>`
         videosContainer.appendChild(div);
         // console.log(parseFloat(video.others.views));

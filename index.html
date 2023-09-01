@@ -14,35 +14,20 @@
 </head>
 
 <body>
-    <header class="container mx-auto py-10 border-b-[2px]">
-        <div class="headerWrap flex justify-between items-center">
-            <img src="./images/Logo.png" alt="logo" class="logo w-[200px]">
-            <button class="sort btnGrayBig">Sort by view</button>
-            <button class="blog btnRedBig">Blog</button>
+    <header class="container mx-auto py-10 border-b-[2px] px-4 sm:px-0">
+        <div class="headerWrap flex flex-row flex-wrap justify-between items-center gap-6 sm:flex-row sm:justify-between">
+            <img src="./images/Logo.png" alt="logo" class="logo w-[200px] order-1">
+            <button class="sort btnGrayBig order-3 mx-auto mt-10 sm:mt-0">Sort by view</button>
+            <button class="blog btnRedBig order-2 sm:order-3">Blog</button>
         </div>
     </header>
-    <main class="container mx-auto py-10">
+    <main class="container mx-auto py-10 px-4 sm:px-0">
         <div class="content space-y-10">
-            <div class="categories flex gap-5 justify-center"></div>
-            <div class="videosContainer grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-8 justify-center">
-                <!-- <div class="video max-w-sm">
-                    <img class="rounded-lg" src="https://i.ibb.co/L1b6xSq/shape.jpg" alt="thumbnail" />
-                    <div class="py-5 cardContent flex gap-3">
-                        <img src="https://i.ibb.co/D9wWRM6/olivia.jpg" alt="avatar"
-                            class="avatar rounded-full h-[60px]">
-                        <div class="avatarContent">
-                            <h4 class="mb-2 secon primaryHeading">Noteworthy
-                                technology acquisitions 2021</h4>
-                            <div class="author flex items-center justify-start gap-2">
-                                <p class="text">Awlad Hossain</p><img src="./images/verified.png" alt="verified"
-                                    class="w-5">
-                            </div>
-                            <p class="text">99K views</p>
-                        </div>
-                    </div>
-                </div> -->
+            <div class="categories flex flex-wrap gap-5 justify-center px-4 sm:px-0"></div>
+            <div class="videosContainer grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 sm:gap-5 lg:gap-8 justify-center">
+                
             </div>
-            <div class="noContent py-20 sm:max-w-[500px] mx-auto space-y-8 flex flex-col justify-center items-center hidden">
+            <div class="noContent py-8 sm:py-20 sm:max-w-[500px] mx-auto space-y-8 flex flex-col justify-center items-center hidden">
                 <img src="./images/Icon.png" alt="No video found">
                 <h4 class="text-[32px] font-bold text-center">Oops!! Sorry, There is no content here</h4>
             </div>
