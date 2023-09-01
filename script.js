@@ -4,11 +4,12 @@ let loadCategories = async () => {
     let getData = await fetchData.json();
     let videoCategories = getData.data;
     // console.log(getData);
-    // console.log(videoCategories);
     handleData(videoCategories);
+    loadVideos(videoCategories[0]);
 }
 
 let handleData = (categories) => {
+    console.log(categories[3]);
     let tabs = document.querySelector('.categories');
     categories.forEach(category => {
         let categoryName = category.category;
@@ -23,33 +24,48 @@ let handleData = (categories) => {
             currentElement.parentNode.childNodes.forEach(element => {
                 element.classList.remove('btnRedSmall');
                 e.target.classList.add('btnRedSmall');
+                loadVideos(category);
             })
         });
-        loadVideos(categoryName, category.category_id);
     })
 }
 
-let loadVideos = async (category, id) => {
+let loadVideos = async (category) => {
+    let id = category.category_id;
     let fetchVideos = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`);
     let getVideos = await fetchVideos.json();
     let videos = getVideos.data;
+    let noVideo = document.querySelector('.noContent');
+    noVideo.classList.add('hidden');
+    // console.log(videos);
     let videosContainer = document.querySelector('.videosContainer');
-    videos.forEach(video =>{
+    videosContainer.innerHTML = '';
+    if (videos.length === 0) {
+    //     let div = document.createElement('div');
+    //     div.innerHTML = `<div class="noContent space-y-5 flex flex-col justify-center items-center mx-auto container">
+    //     <img src="./images/Icon.png" alt="No video found">
+    //     <h4 class="text-[32px] font-bold text-center">Oops!! Sorry, There is no content here</h4>
+    // </div>`
+    //     videosContainer.appendChild(div);
+    noVideo.classList.remove('hidden');
+    }
+    videos.forEach(video => {
+        console.log(video.authors[0].verified);
         let div = document.createElement('div');
         div.classList.add('video', 'max-w-sm');
         div.innerHTML = ` <img class="rounded-lg w-full h-[220px]" src="${video.thumbnail}" alt="thumbnail" />
         <div class="py-5 cardContent flex gap-3">
             <img src="${video.authors[0].profile_picture}" alt="avatar"
-                class="avatar rounded-full h-[60px] w-[60px]">
+                class="avatar rounded-full h-[50px] w-[50px] cover">
             <div class="avatarContent">
                 <h4 class="mb-2 secon primaryHeading">${video.title}</h4>
                 <div class="author flex items-center justify-start gap-2">
-                    <p class="text">${video.authors[0].profile_name}</p><img src="./images/verified.png" alt="verified"
-                        class="w-5">
+                    <p class="text">${video.authors[0].profile_name}</p> <img src="./images/verified.png" alt="verified
+                        class="block w-4 ${video.authors[0].verified?'hidden':'block'}>
                 </div>
                 <p class="text mt-2">99K views</p>
             </div>`
-            videosContainer.appendChild(div);
+        videosContainer.appendChild(div);
     })
 
 }
