@@ -1,19 +1,19 @@
+
 // Call the data
-let loadCategories = async () => {
+async function loadCategories () {
     let fetchData = await fetch(`https://openapi.programming-hero.com/api/videos/categories`);
     let getData = await fetchData.json();
     let videoCategories = getData.data;
-    // console.log(getData);
     handleData(videoCategories);
     loadVideos(videoCategories[0]);
 }
 
-let handleData = (categories) => {
-    console.log(categories[3]);
+// This function will pull the categories from the fetched data
+function handleData (categories) {
     let tabs = document.querySelector('.categories');
+    tabs.innerHTML = '';
     categories.forEach(category => {
         let categoryName = category.category;
-        // console.log(category);
         const button = document.createElement('button');
         button.innerHTML = `${categoryName}`;
         button.classList.add('btnGraySmall');
@@ -30,30 +30,30 @@ let handleData = (categories) => {
     })
 }
 
-let loadVideos = async (category) => {
+// It will fetch the videos by the category ID & will load the videos for the specific category
+async function loadVideos (category) {
     let id = category.category_id;
     let fetchVideos = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`);
     let getVideos = await fetchVideos.json();
     let videos = getVideos.data;
     let noVideo = document.querySelector('.noContent');
     noVideo.classList.add('hidden');
-    // console.log(videos);
     let videosContainer = document.querySelector('.videosContainer');
     videosContainer.innerHTML = '';
     if (videos.length === 0) {
-    noVideo.classList.remove('hidden');
+        noVideo.classList.remove('hidden');
     }
 
     showVideos(videos);
     sortVideos(videos);
 }
 
-let showVideos = videos => {
+// It will load the videos data from the loadvideos() function and will show the videos into the page.
+function showVideos (videos) {
     let videosContainer = document.querySelector('.videosContainer');
     videosContainer.innerHTML = '';
     videos.forEach(video => {
         let postedDate = calculatePostedDate(video);
-        console.log(postedDate);
         let div = document.createElement('div');
         div.classList.add('video', 'max-w-sm', 'relative');
         div.innerHTML = ` <img class="rounded-lg w-full h-[220px] md:h-[160px] lg:h-[220px] relative" src="${video.thumbnail}" alt="thumbnail" />
@@ -70,48 +70,67 @@ let showVideos = videos => {
                 <p class="text">${video.others.views? video.others.views: 'No'} views</p>
             </div>`
         videosContainer.appendChild(div);
-        // console.log(parseFloat(video.others.views));
     })
 }
 
-let calculatePostedDate = (video) => {
-    // console.log(video);
+// It will calculate the posted date of the each video & will convert the seconds to standard format. Then will send the data to the showVideos() function
+function calculatePostedDate (video) {
     let seconds = video.others.posted_date;
-    // console.log(seconds);
-    if( seconds !== '' && seconds > 0) {
+    if (seconds !== '' && seconds > 0) {
         let days = `${Math.floor(seconds / (60 * 60 * 24))} days`;
-    seconds %= 3600 * 24;
-    let hours = `${Math.floor(seconds / 3600)} hrs`;
-    seconds %= 3600;
-    const minutes = `${Math.floor(seconds / 60)} min`;
+        seconds %= 3600 * 24;
+        let hours = `${Math.floor(seconds / 3600)} hrs`;
+        seconds %= 3600;
+        const minutes = `${Math.floor(seconds / 60)} min`;
 
-    let date = `${days} ${hours} ${minutes}`;
-    if(parseFloat(days) === 0){
-        return `${hours} ${minutes}`;
-    } else if (parseFloat(hours) === 0){
-        return `${days} ${minutes}`;
-    } else if (parseFloat(minutes) === 0){
-        return `${days} ${hours}`;
-    } else if (parseFloat(days) === 0 && parseFloat(hours) === 0){
-        return minutes;
-    } else if (parseFloat(hours) === 0 && parseFloat(minutes) === 0){
-        console.log(date);
-        return null;
-    } else if (parseFloat(days) === 0 && parseFloat(minutes) === 0){
-        return hours;
-    } 
+        if (parseFloat(days) === 0) {
+            return `${hours} ${minutes}`;
+        } else if (parseFloat(hours) === 0) {
+            return `${days} ${minutes}`;
+        } else if (parseFloat(minutes) === 0) {
+            return `${days} ${hours}`;
+        } else if (parseFloat(days) === 0 && parseFloat(hours) === 0) {
+            return minutes;
+        } else if (parseFloat(hours) === 0 && parseFloat(minutes) === 0) {
+            return null;
+        } else if (parseFloat(days) === 0 && parseFloat(minutes) === 0) {
+            return hours;
+        }
     }
 }
 
-let sortVideos = videos => {
+// It will sort the videos by the number of views
+function sortVideos (videos) {
     let sortButton = document.querySelector(".sort");
-    sortButton.addEventListener("click", () =>{
-        let sortedVideos = videos.sort((a , b) => parseFloat(b.others.views) - parseFloat(a.others.views));
-        console.log(sortedVideos);
+    sortButton.addEventListener("click", () => {
+        let sortedVideos = videos.sort((a, b) => parseFloat(b.others.views) - parseFloat(a.others.views));
         showVideos(sortedVideos);
     })
-    
+
 }
 
-
 loadCategories();
+
+
+// It will show blog page content once the 'blog' button is clicked.
+document.getElementById('blogButton').addEventListener('click', () => {
+    let newEndpoint = '/blog.html'; // Replace with the desired endpoint
+    history.pushState(null, '', newEndpoint);
+
+    let fetchData = async () => {
+        let fetchData = await fetch('./blog.html');
+        let data = await fetchData.text();
+        document.querySelector("script[src='./script.js']")?.remove();
+        document.querySelector("script[src='./blog.js']")?.remove();
+        let script = document.createElement('script');
+        script.src = './blog.js';
+        document.head.appendChild(script);
+        let div = document.createElement('div');
+        div.innerHTML = data;
+        let blogMain = div.querySelector('main');
+        let homeMain = document.querySelector('main');
+        homeMain.replaceWith(blogMain);
+    };
+
+    fetchData();
+});

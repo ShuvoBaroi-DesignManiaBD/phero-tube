@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | PHero Tube</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google fonts -->
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <main
+        class="container mx-auto py-10 px-4 sm:py-20 grid items-start md:items-start lg:items-start gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="bg-white border border-gray-200 rounded-lg shadow">
+            <a href="#">
+                <img class="rounded-t-lg h-[300px] w-full" src="./images/scopes.webp" alt="thumbnail" />
+            </a>
+            <div class="p-5">
+                <a href="#">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Discuss the scope of var, let, and
+                        const</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700">
+                    Scope determines the accessibility (visibility) of variables. Javascript has 3 types of scope: Block
+                    scope, Function scope & Global scope.<br><br>
+                    <strong>Var:</strong> Var has function scope, making it accessible throughout the function where
+                    it's declared or
+                    globally if declared outside any function. It's hoisted, allowing access before declaration.
+                    <br><br>
+
+                    <strong>Let:</strong> Let has block scope, limiting its access to the block (ex. loops or
+                    conditionals) where it's
+                    defined. It's not hoisted and can be reassigned within the same scope.<br><br>
+
+                    <strong>Const:</strong> Const also has block scope and cannot be reassigned after initial
+                    assignment, making it
+                    suitable for constants. Like `let`, it's not hoisted.
+
+                </p>
+            </div>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-lg shadow">
+            <a href="#">
+                <img class="rounded-t-lg h-[300px] w-full" src="./images/null_undefined.webp" alt="thumbnail" />
+            </a>
+            <div class="p-5">
+                <a href="#">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Tell us the use cases of null and
+                        undefined</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700">
+                    <strong>Use Cases for NULL:</strong> <code>Null</code> serves several purposes. Firstly, it's used
+                    to indicate an
+                    <strong>absence
+                        of value</strong>, showing that a variable or property is intentionally empty or uninitialized.
+                    Secondly,
+                    it's handy for <strong>resetting variables</strong>, allowing you to clear the previous data while
+                    retaining the
+                    variable. Additionally, <code>null</code> can be employed as a <strong>placeholder</strong> value in
+                    data
+                    structures and
+                    algorithms, signifying that a value will be assigned or computed later. Lastly, in error handling,
+                    <code>null</code> can be returned by functions to <strong>signal errors</strong> or an inability to
+                    produce a
+                    valid result,
+                    providing a clear indicator of issues.<br><br>
+
+                    <strong>Use Cases for UNDEFINED:</strong>
+                    <ol class="list-decimal px-3">
+                        <li>
+                            <p><strong>Implicit Absence of Value</strong>: <code>undefined</code> is automatically
+                                assigned to variables that exist but have not been given a value, indicating their
+                                absence of a meaningful value.</p>
+                        </li>
+                        <li>
+                            <p><strong>Function Parameters</strong>: When calling a function with fewer arguments than
+                                expected, missing parameters are set to <code>undefined</code>, useful for conditional
+                                logic or default values.</p>
+                        </li>
+                        <li>
+                            <p><strong>Property Access</strong>: Attempting to access a non-existent object property
+                                results in <code>undefined</code>, helping handle missing or optional properties.</p>
+                        </li>
+                        <li>
+                            <p><strong>Implicit Return</strong>: Functions lacking a <code>return</code> statement or
+                                returning no value implicitly return <code>undefined</code>, often used in certain
+                                programming patterns.</p>
+                        </li>
+                    </ol>
+                </p>
+            </div>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-lg shadow">
+            <a href="#">
+                <img class="rounded-t-lg h-[300px] w-full" src="./images/rest_api.webp" alt="thumbnail" />
+            </a>
+            <div class="p-5">
+                <a href="#">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">What do you mean by REST API?</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700">
+                    <strong>API</strong> means <code>Application Programming Interface</code> whethere <strong>REST API</strong>(Representational State Transfer Application Programming Interface) is a framework for
+                    designing web services with specific architectural principles. RESTful APIs are commonly used in web
+                    development to enable communication between software applications.<br><br>
+
+                    REST APIs are <strong>stateless</strong>, meaning each client-server interaction includes all necessary information.
+                    They employ a resource-based approach, with entities represented as resources accessed via standard
+                    <strong>HTTP</strong> methods.<br><br>
+
+                    In summary, RESTful APIs simplify communication between software components, promoting scalability
+                    and ease of use in web applications and services.
+                </p>
+            </div>
+        </div>
+    </main>
+    <script src="./blog.js"></script>
+</body>
+
+</html>

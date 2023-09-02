@@ -6,27 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHero Tube</title>
     <link rel="stylesheet" href="./style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+
+    <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google fonts -->
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
+    <!-- Header Area -->
     <header class="container mx-auto py-10 border-b-[2px] px-4 sm:px-0">
         <div class="headerWrap flex flex-row flex-wrap justify-between items-center gap-6 sm:flex-row sm:justify-between">
-            <img src="./images/Logo.png" alt="logo" class="logo w-[200px] order-1">
+            <img src="./images/Logo.png" alt="logo" class="logo w-[200px] order-1 cursor-pointer">
             <button class="sort btnGrayBig order-3 mx-auto mt-10 sm:mt-0">Sort by view</button>
-            <button class="blog btnRedBig order-2 sm:order-3">Blog</button>
+            <button id="blogButton" class="blog btnRedBig order-2 sm:order-3">Blog</button>
         </div>
     </header>
-    <main class="container mx-auto py-10 px-4 sm:px-0">
+    <!-- Content Area -->
+    <main id="contentContainer" class="container mx-auto py-10 px-4 sm:px-0">
         <div class="content space-y-10">
+            <!-- Category tabs -->
             <div class="categories flex flex-wrap gap-5 justify-center px-4 sm:px-0"></div>
+            <!-- Videos Container -->
             <div class="videosContainer grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 sm:gap-5 lg:gap-8 justify-center">
                 
             </div>
+            <!-- No video content -->
             <div class="noContent py-8 sm:py-20 sm:max-w-[500px] mx-auto space-y-8 flex flex-col justify-center items-center hidden">
                 <img src="./images/Icon.png" alt="No video found">
                 <h4 class="text-[32px] font-bold text-center">Oops!! Sorry, There is no content here</h4>
